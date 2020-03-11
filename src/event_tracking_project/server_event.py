@@ -3,7 +3,6 @@ from flask import Flask, render_template
 app = Flask(__name__)
 
 @app.route('/')
-
 def index():
     title = 'EVENT'
     return render_template('start_page.html', page_title=title)
