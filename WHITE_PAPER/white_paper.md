@@ -39,25 +39,25 @@
 
 **Ресурсы:**
 
-last.fm/API
+-   last.fm/API
 
-viagogo (optional)
+-   viagogo (optional)
 
-aviasales
+-   aviasales
 
-rzhd
+-   rzhd
 
-tutu.ru
+-   tutu.ru
 
 **Похожие проекты:**
 
-viagogo.com
+-   viagogo.com
 
-songkick.com
+-   songkick.com
 
-afisha,ru
+-   afisha,ru
 
-be-there.events
+-   be-there.events
 
 **Внутреннее устройство:**
 
@@ -72,7 +72,10 @@ be-there.events
 5.  Парсинг билетов на транспорт
 
 6.  Хранилища исполнителей, событий, городов и опций по транспорту
-    > (билетов, рейсов)
+    (билетов, рейсов)
+
+
+### Верхнеуровневая архитектура проекта
 
 ![](.//media/image1.png){width="6.838680008748907in"
 height="7.780306211723534in"}
