@@ -8,7 +8,6 @@ from event_tracking_project.model import db, Users
 from event_tracking_project.forms import LoginForm
 
 
-
 def create_app():
     app = Flask(__name__)
     app.config.from_pyfile('config.py')
@@ -37,11 +36,11 @@ def create_app():
         login_form = LoginForm()
         return render_template('login.html', page_title=title, form=login_form)
 
-    
+
     @app.route('/proess-login', methods=['POST'])
     def process_login():
         form = LoginForm()
-        
+
         if form.validate_on_submit():
             user = Users.query.filter(Users.username == form.username.data).first()
             if user and user.check_password(form.password.data):
