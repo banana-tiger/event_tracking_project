@@ -11,4 +11,4 @@ class Airports(db.Model):
     flightable = db.Column(db.Boolean, nullable=False)
 
     def __repr__(self):
-        return '<Airports {} {} {}>'.format(self.country_code, self.name, self.code)
+        return '<Airports {} {} {} flightable == {}>'.format(self.country_code, self.name, self.code, self.flightable)
