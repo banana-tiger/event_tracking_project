@@ -1,7 +1,8 @@
-from src.event_tracking_project.server_event import app
+from src.event_tracking_project import create_app
 
 
 def run_app():
+    app = create_app()
     app.run(debug=True)
 
 
