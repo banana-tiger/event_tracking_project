@@ -1,6 +1,14 @@
 import os
+from pathlib import Path
 
-basedir = os.path.abspath(os.path.dirname(__file__))
+THIS_DIR = Path(__file__).absolute().parent
 
-SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'users.db')
-SECRET_KEY = 'iuah45als8j2rjc8j59dj20dj3irjqcbqr4'
+PATH_TO_DB_DIR = THIS_DIR.parent.parent / 'db'
+PATH_TO_DB_DATA = PATH_TO_DB_DIR / 'data/db.sqlite'
+PATH_TO_DB_MIGRATIONS = PATH_TO_DB_DIR / 'migrations'
+
+SQLALCHEMY_DATABASE_URI = 'sqlite:///' + str(PATH_TO_DB_DATA)
+
+SECRET_KEY = os.getenv('EVENT_TRACKING_SECRET_KEY')
+
+SQLALCHEMY_TRACK_MODIFICATIONS = False
