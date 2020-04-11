@@ -1,4 +1,10 @@
+import logging
 import requests
+
+
+logging.basicConfig(level=logging.DEBUG,
+                    format='%(asctime)s %(message)s',
+                    filename='aviasales_api.log')
 
 
 def get_tickets_by_city(city_code_from, city_code_to):
@@ -31,8 +37,8 @@ def get_tickets_by_city(city_code_from, city_code_to):
                      }
                 tickets_list.append(ticket)
     except requests.RequestException:
-        print('Сетевая ошибка')
-        return False
+        logging.debug('Network Error')
+        return None
     return tickets_list
 
 
