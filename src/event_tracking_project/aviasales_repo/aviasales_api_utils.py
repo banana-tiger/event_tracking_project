@@ -43,13 +43,13 @@ def logging_decor(function):
 
 # fetch json function for api_requests
 @logging_decor
-def fetch_json(url):
+def fetch_json(url, params=None):
     """
     returns JSON from url
     """
     # url берем из конфига
 
-    result = requests.get(url)
+    result = requests.get(url, params=params)
     result.raise_for_status()
 
     return result.json()
