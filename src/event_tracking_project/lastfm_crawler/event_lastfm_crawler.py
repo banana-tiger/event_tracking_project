@@ -45,14 +45,15 @@ def fetch_events_by_artist(artist_name: str) -> typing.List[Event]:
             status = getattr(event.select_one('.event-list-item-cancelled'), 'text', 'Актуально')
 
             new_event = Event(event_date=event_date, city=city, country=country, status=status, place=place,
-                               title=artist_name)
+                              title=artist_name)
             all_events.append(new_event)
 
         return all_events
     except(requests.RequestException) as e:
         print(e)
 
-def save_event(new_events: typing.List[Event]):
+
+def dump_events(new_events: typing.List[Event]):
     for event in new_events:
         if not event.exists_in_db():
             db.session.add(event)
