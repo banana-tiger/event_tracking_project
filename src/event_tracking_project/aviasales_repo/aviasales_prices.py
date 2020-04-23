@@ -7,7 +7,7 @@ from src.event_tracking_project.aviasales_repo.aviasales_api_utils import fetch_
 # временно заданы константы,
 # TODO - импорты, пропущенные через API определения кода, либо коды из базы (города и аэропорты уже есть)
 iata_from = 'MOW'
-iata_to = '-'
+iata_to = 'LON'
 
 # тоже пока фиксированные значения для тестов
 # TODO - импорт из модуля ивентов, для подбора билетов нужен только месяц
@@ -57,8 +57,6 @@ class Ticket:
     return_at: str
     expires_at: str
 
-fetch_json(AVIASALES_API_PRICES_URL, params_aviasales_prices)
 
 if __name__ == '__main__':
-    example_tickets = fetch_json(AVIASALES_API_PRICES_URL, params_aviasales_prices)
-    None
+    print(fetch_json(AVIASALES_API_PRICES_URL, params_aviasales_prices))

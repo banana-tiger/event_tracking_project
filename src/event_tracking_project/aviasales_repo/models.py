@@ -1,7 +1,8 @@
 from ..db import db
 
 
-class Airports(db.Model):
+class Airport(db.Model):
+    __tablename__ = 'airports'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
     code = db.Column(db.String, unique=True, nullable=False)
@@ -11,7 +12,8 @@ class Airports(db.Model):
 
 
 # некоторые города обладают одинаковым названием поэтому есть идея сделать комбинированное поле code + country_code
-class Cities(db.Model):
+class City(db.Model):
+    __tablename__ = 'cities'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
     code = db.Column(db.String, unique=True, nullable=False)

@@ -1,22 +1,27 @@
 import functools
 import logging
 import requests
+from pathlib import Path
 
 
 # logger function
-def create_logger():
+def create_logger(name: str = None, log_path: Path = Path('log.log')):
     """
     Creates a logging object and returns it
     """
-    logger = logging.getLogger("example_logger")
+    logger_name = name if name else __name__
+    logger = logging.getLogger(logger_name)
     logger.setLevel(logging.INFO)
+
     # create the logging file handler
-    fh = logging.FileHandler("aviasales_api.log")
+    fh = logging.FileHandler(log_path)
     fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+
     formatter = logging.Formatter(fmt)
     fh.setFormatter(formatter)
     # add handler to logger object
     logger.addHandler(fh)
+
     return logger
 
 
@@ -31,13 +36,10 @@ def logging_decor(function):
         logger = create_logger()
         try:
             return function(*args, **kwargs)
-        except:
-            # log the exception
-            err = "There was an exception in  "
-            err += function.__name__
-            logger.exception(err)
-            # re-raise the exception
+        except Exception:
+            logger.exception("Logging decorator handle error")
             raise
+
     return wrapper
 
 
