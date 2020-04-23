@@ -5,8 +5,10 @@ from flask_migrate import Migrate
 from src.event_tracking_project.config import PATH_TO_DB_MIGRATIONS
 from src.event_tracking_project.db import db
 
-from src.event_tracking_project.aviasales_repo.models import Airports, Cities
+from src.event_tracking_project.aviasales_repo.models import Airport, City
 from src.event_tracking_project.user.model import Users
+
+from src.event_tracking_project.lastfm_crawler.model import Event
 
 
 def create_app():
