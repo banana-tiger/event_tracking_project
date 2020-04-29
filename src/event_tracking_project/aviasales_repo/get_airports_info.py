@@ -1,5 +1,3 @@
-from dataclasses import dataclass
-
 from src.event_tracking_project import create_app
 from src.event_tracking_project.aviasales_repo.aviasales_api_utils import fetch_json
 from src.event_tracking_project.aviasales_repo.config import AVIASALES_API_AIRPORTS_URL
