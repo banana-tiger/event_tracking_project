@@ -11,10 +11,8 @@ from src.event_tracking_project.db import db
 #     country_code: str
 #     codes_combo: str
 
-city = City()
 
-
-def dump_city_in_db(city: City = city):
+def dump_city_in_db(city: City):
     new_city = City(
         name=city.name,
         code=city.code,
