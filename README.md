@@ -17,3 +17,5 @@ export EVENT_TRACKING_SECRET_KEY='lolkek' \
 ```
 set EVENT_TRACKING_SECRET_KEY='lolkek' && set FLASK_APP=migrator.py && flask db migrate -m "#migration message"
 ```
+
+```export EVENT_TRACKING_SECRET_KEY='lolkek' && export FLASK_APP=migrator.py && flask db migrate -m "#migration message"```
