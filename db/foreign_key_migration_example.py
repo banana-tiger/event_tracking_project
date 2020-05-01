@@ -11,3 +11,4 @@ def downgrade():
     with op.batch_alter_table("cities") as b_op:
         b_op.drop_constraint("fk_cities_country_code_countries", type_='foreignkey')
     # ### end Alembic commands ###
+    
