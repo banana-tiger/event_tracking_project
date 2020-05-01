@@ -1,8 +1,9 @@
 from flask import Blueprint, flash, render_template, redirect, url_for
-from flask_login import current_user, login_user, logout_user
+from flask_login import current_user, login_user, logout_user, login_required
 
-from .forms import LoginForm, RegistrationForm
-from .model import Users
+from .forms import DeletedSubscriptionForm, LoginForm, RegistrationForm, SubscriptionForm, EventForm
+from .model import Users, Artists, Subscription
+from ..lastfm_crawler.model import Event
 from ..db import db
 
 user_blueprint = Blueprint(name='user', import_name=__name__, url_prefix='/users')
@@ -59,3 +60,52 @@ def process_reg():
         return redirect(url_for('user.login'))
     flash('Пожалуйста, исправьте ошибки в форме')
     return redirect(url_for('user.reg'))
+
+
+@user_blueprint.route('/subscription')
+def subscription():
+
+    title = 'Подписки'
+    form = SubscriptionForm()
+    list_sub = Subscription.query.filter_by(user_id=current_user.id)
+    return render_template('profile/subscription.html', page_title=title, form=form, list_sub=list_sub)
+
+
+@user_blueprint.route('/subs-create', methods=['POST'])
+@login_required
+def create_sub():
+    form = SubscriptionForm()
+    if form.validate_on_submit():
+        artist = Artists.get_or_create(db.session, form.artist_name.data)
+
+        sub = Subscription(artist_id=artist.artist_id, user_id=current_user.id)
+        db.session.add(sub)
+        db.session.commit()
+
+        return redirect(url_for('user.subscription'))
+    return redirect(url_for('user.subscription'))
+
+
+@user_blueprint.route('/subs-del/<int:subs_id>', methods=['POST'])
+@login_required
+def delete_sub(subs_id):
+    form = DeletedSubscriptionForm()
+    sub = Subscription.query.filter_by(subs_id=subs_id).first()
+
+    db.session.delete(sub)
+    db.session.commit()
+    return redirect(url_for('user.subscription'))
+
+
+@user_blueprint.route('/profile')
+def profile():
+    title = 'Профиль'
+    return render_template('profile/profile.html', page_title=title)
+
+
+@user_blueprint.route('/events/<int:subs_artist_id>')
+def events(subs_artist_id):
+    form = EventForm()
+    page_title = 'Мероприятия'
+    list_events = Event.query.filter_by(title=subs_artist_id).all()
+    return render_template('event/events.html', page_title=page_title, list_events=list_events)

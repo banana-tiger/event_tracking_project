@@ -18,3 +18,17 @@ class RegistrationForm(FlaskForm):
     password2 = PasswordField('Повторите пароль', validators=[DataRequired(), EqualTo('password')],
                               render_kw={"class": "form-control"})
     submit = SubmitField('Отправить', render_kw={"class": "btn btn-primary"})
+
+
+class SubscriptionForm(FlaskForm):
+    artist_name = StringField('Группа', validators=[DataRequired()], render_kw={"class": "form-control"})
+    submit = SubmitField('подписаться', render_kw={"class": "btn btn-primary"})
+
+
+class DeletedSubscriptionForm(FlaskForm):
+    submit = SubmitField(render_kw={"class": "btn btn-primary"})
+
+
+class EventForm(FlaskForm):
+    submit = SubmitField(render_kw={"class": "btn btn-primary"})
+
