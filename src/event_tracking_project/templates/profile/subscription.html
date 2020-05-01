@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-6">
+        <form action="{{ url_for('user.create_sub') }}" method="POST">
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+                {{ form.artist_name.label }}
+                {{ form.artist_name() }}
+            </div>
+            {{ form.submit() }}
+        </form>
+        <div class="row">
+            {% for sub in list_sub %}
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{ sub.artist.artist_name }}
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="{{ url_for('user.events', subs_artist_id=sub.artist_id) }}">Просмотр мероприятий</a>
+                    <div class="dropdown-divider"></div>
+                    <form action="{{ url_for('user.delete_sub', subs_id=sub.subs_id) }}" method="POST">
+                        <button class="dropdown-item" type="submit">
+                            Отписаться от {{ sub.artist.artist_name }}
+                        </button>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Город" aria-label="Recipient's username"
+                   aria-describedby="button-addon2">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" id="button-addon2">Подписаться</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

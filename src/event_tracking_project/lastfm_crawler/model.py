@@ -9,6 +9,8 @@ class Event(db.Model):
     city = db.Column(db.Text)
     country = db.Column(db.Text)
     status = db.Column(db.Text)
+    artist_id = db.Column(db.Integer, db.ForeignKey("artists.artist_id"))
+
 
     def exists_in_db(self) -> bool:
         event_exists = Event.query.filter(Event.event_date == self.event_date,
