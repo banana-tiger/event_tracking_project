@@ -12,7 +12,7 @@ from src.event_tracking_project.user.model import Users
 
 from src.event_tracking_project.lastfm_crawler.model import Event
 
-THIS_DIR = Path(__file__).absolute().parent
+THIS_DIR = Path(__file__).resolve().parent
 
 
 def create_app():
