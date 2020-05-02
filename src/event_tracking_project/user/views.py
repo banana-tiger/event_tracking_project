@@ -100,7 +100,9 @@ def delete_sub(subs_id):
 @user_blueprint.route('/profile')
 def profile():
     title = 'Профиль'
-    return render_template('profile/profile.html', page_title=title)
+    form = RegistrationForm()
+    user = Users.query.filter_by(id=current_user.id).first()
+    return render_template('profile/profile.html', page_title=title, user=user)
 
 
 @user_blueprint.route('/events/<int:subs_artist_id>')

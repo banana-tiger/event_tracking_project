@@ -11,4 +11,4 @@ def all_events(artists: list) -> None:
 if __name__ == '__main__':
     app = create_app()
     with app.app_context():
-        all_events(['Rammstein', 'Woodkid', 'Jane Air'])
+        all_events(['Rammstein', 'Woodkid', 'Jane Air', 'Soen', 'Felly', 'Millencolin', 'Rob Dekay', 'Ray Wilson', '1984', 'Joliette'])
