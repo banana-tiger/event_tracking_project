@@ -134,3 +134,6 @@ dmypy.json
 # PyCharm stuff
 .idea/
 
+.db/data/db.sqlite
+db/data/db.sqlite
+.db/data/
