@@ -6,6 +6,7 @@ from flask_migrate import Migrate
 from .config import PATH_TO_DB_MIGRATIONS
 from .db import db
 
+from .lastfm_crawler.model import Event
 from .user.model import Users
 from .user.views import user_blueprint
 
@@ -28,7 +29,8 @@ def create_app():
     @app.route('/')
     def index():
         title = 'EVENT'
-        return render_template('start_page.html', page_title=title)
+        list_event = reversed(Event.query.filter(Event.city == 'Moscow').order_by(Event.event_date.desc())[-10:])
+        return render_template('start_page.html', page_title=title, list_event=list_event)
 
     @app.route('/admin')
     @login_required

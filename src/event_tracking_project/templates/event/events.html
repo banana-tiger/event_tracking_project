@@ -2,7 +2,6 @@
 {% block content %}
 {% for event in list_events %}
 <h3>
-    <a {{ event.title }}></a>
     {{ event.title }}
     {{ event.event_date.strftime('%Y-%m-%d') }}
     {{ event.place }}
