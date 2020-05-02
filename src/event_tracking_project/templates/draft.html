@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">{{ event.title }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{ event.event_date.strftime('%Y-%m-%d') }}</h6>
+                <h6 class="card-subtitle mb-2 text-muted">{{ event.status }}</h6>
+                <p class="card-text">{{ event.place }}, {{ event.city }}</p>
+                <p class="card-text">{{ event.country }}</p>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="customSwitch1">
+                    <label class="custom-control-label" for="customSwitch1">Подписаться</label>
+                </div>
+                <br>
+                <a href="#" class="card-link">Поиск авиабилетов</a>
+</body>
+</html>

@@ -16,5 +16,5 @@ class Event(db.Model):
         event_exists = Event.query.filter(Event.event_date == self.event_date,
                                           Event.place == self.place,
                                           Event.title == self.title,
-                                          ).count()
+                                          Event.artist_id == self.artist_id).count()
         return event_exists > 0

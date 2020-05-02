@@ -6,6 +6,7 @@ from bs4 import BeautifulSoup
 
 from ..db import db
 from .model import Event
+from ..user.model import Artists
 
 
 def prepare_artist_name(artist_name: str) -> str:
@@ -19,7 +20,8 @@ def get_html(url: str) -> str:
     return result.text
 
 
-def fetch_events_by_artist(artist_name: str) -> typing.List[Event]:
+def fetch_events_by_artist(artist: Artists) -> typing.List[Event]:
+    artist_name = artist.artist_name
     url = f"https://www.last.fm/ru/music/{prepare_artist_name(artist_name)}/+events"
 
     try:
@@ -45,7 +47,7 @@ def fetch_events_by_artist(artist_name: str) -> typing.List[Event]:
             status = getattr(event.select_one('.event-list-item-cancelled'), 'text', 'Актуально')
 
             new_event = Event(event_date=event_date, city=city, country=country, status=status, place=place,
-                              title=artist_name)
+                              title=artist_name, artist_id=artist.artist_id )
             all_events.append(new_event)
 
         return all_events

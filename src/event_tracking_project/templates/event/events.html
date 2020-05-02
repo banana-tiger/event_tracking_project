@@ -1,13 +1,20 @@
 {% extends "base.html" %}
 {% block content %}
 {% for event in list_events %}
-<h3>
-    {{ event.title }}
-    {{ event.event_date.strftime('%Y-%m-%d') }}
-    {{ event.place }}
-    {{ event.city }}
-    {{ event.country }}
-    {{ event.status }}
-</h3>
+<div class="row">
+  <div class="col-12">
+<div class="list-group" id="{{ event }}" role="tablist">
+  <a class="list-group-item list-group-item-action">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">{{ event.place }}</h5>
+      <small class="text-muted">{{ event.event_date.strftime('%Y-%m-%d') }}</small>
+    </div>
+    <p class="mb-1">{{ event.city }}</p>
+    <p class="mb-1">{{ event.country }}</p>
+    <small class="text-muted">{{ event.status }}</small>
+  </a>
+</div>
+</div>
+</div>
 {% endfor %}
 {% endblock %}
