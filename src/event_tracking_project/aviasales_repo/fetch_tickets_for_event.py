@@ -4,10 +4,17 @@ from dataclasses import dataclass
 from src.event_tracking_project.aviasales_repo.config import AVIASALES_API_PRICES_URL
 from src.event_tracking_project.aviasales_repo.aviasales_api_utils import fetch_json
 
+from src.event_tracking_project.aviasales_repo.models import Ticket
+
+
+from src.event_tracking_project.aviasales_repo.get_event_city_code import get_event_city_code
+
+
+
 # временно заданы константы,
 # TODO - импорты, пропущенные через API определения кода, либо коды из базы (города и аэропорты уже есть)
 iata_from = 'MOW'
-iata_to = 'LON'
+iata_to = get_event_city_code()
 
 # тоже пока фиксированные значения для тестов
 # TODO - импорт из модуля ивентов, для подбора билетов нужен только месяц
@@ -46,16 +53,6 @@ params_aviasales_prices = {'token': '0e3ffa862fa3da9c0d94f2e4d0f80751',
 # departure_at — Дата вылета.
 # return_at — Дата возвращения.
 # expires_at — Дата истечения актуальности найденной цены (UTC+0).
-
-
-@dataclass
-class Ticket:
-    price: float
-    airline: str
-    flight_number: str  # Может быть int
-    departure_at: str
-    return_at: str
-    expires_at: str
 
 
 if __name__ == '__main__':

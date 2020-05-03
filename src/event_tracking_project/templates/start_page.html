@@ -12,11 +12,14 @@
         {% endif %}
         {% endwith %}
     </div>
+
     <div class="container">
+         <div class="row">
         {% for event in list_event %}
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">{{ event.title }}</h5>
+              <div class="col-sm-4">
+                <div class="card border-dark mb-3" style="max-width: 18rem;">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ event.title }}</h5>
                 <h6 class="card-subtitle mb-2 text-muted">{{ event.event_date.strftime('%Y-%m-%d') }}</h6>
                 <h6 class="card-subtitle mb-2 text-muted">{{ event.status }}</h6>
                 <p class="card-text">{{ event.place }}, {{ event.city }}</p>
@@ -25,18 +28,11 @@
                     <input type="checkbox" class="custom-control-input" id="customSwitch1">
                     <label class="custom-control-label" for="customSwitch1">Подписаться</label>
                 </div>
-                <br>
-                <a href="#" class="card-link">найти билеты</a>
-
-            </div>
+                  </div>
+                </div>
         </div>
         <br>
         {% endfor %}
     </div>
-    <div class="container">
-        <h3>блок 2 пустой</h3>
-    </div>
-    <div class="col-4">
-
-    </div>
     {% endblock %}
+    </div>

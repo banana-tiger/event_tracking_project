@@ -4,6 +4,7 @@ from flask_login import current_user, login_user, logout_user, login_required
 from .forms import DeletedSubscriptionForm, LoginForm, RegistrationForm, SubscriptionForm, EventForm
 from .model import Users, Artists, Subscription
 from ..lastfm_crawler.model import Event
+from ..lastfm_crawler.get_all_event import get_events_by_artist
 from ..db import db
 
 user_blueprint = Blueprint(name='user', import_name=__name__, url_prefix='/users')
@@ -43,7 +44,7 @@ def logout():
 def registration():
     if current_user.is_authenticated:
         return redirect(url_for('index'))
-    title = 'Регистарция'
+    title = 'Регистрация'
     form = RegistrationForm()
     return render_template('reg.html', page_title=title, form=form)
 
@@ -109,5 +110,10 @@ def profile():
 def events(subs_artist_id):
     form = EventForm()
     page_title = 'Мероприятия'
-    list_events = Event.query.filter_by(title=subs_artist_id).all()
+    list_events = Event.query.filter_by(artist_id=subs_artist_id).all()
+    if not list_events:
+        artist = Artists.query.filter_by(artist_id=subs_artist_id).first()
+        get_events_by_artist(artist)
+        list_events = Event.query.filter_by(artist_id=subs_artist_id).all()
+
     return render_template('event/events.html', page_title=page_title, list_events=list_events)

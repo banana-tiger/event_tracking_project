@@ -1,7 +1,6 @@
 from flask import Flask, render_template
 from flask_login import LoginManager, login_required
-
-from flask_migrate import Migrate
+from sqlalchemy import or_
 
 from .config import PATH_TO_DB_MIGRATIONS
 from .db import db
@@ -29,7 +28,7 @@ def create_app():
     @app.route('/')
     def index():
         title = 'EVENT'
-        list_event = reversed(Event.query.filter(Event.city == 'Moscow').order_by(Event.event_date.desc())[-10:])
+        list_event = reversed(Event.query.filter(Event.city == 'Moscow').order_by(Event.event_date.desc())[-9:])
         return render_template('start_page.html', page_title=title, list_event=list_event)
 
     @app.route('/admin')
